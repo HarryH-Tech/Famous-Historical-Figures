@@ -20,6 +20,10 @@ export const addPerson = async (personData) => {
   return req.data;
 };
 
+export const deletePerson = async (id) => {
+  console.log(id);
+};
+
 export const peopleSlice = createSlice({
   name: "people_slice",
   initialState: {
@@ -39,6 +43,10 @@ export const peopleSlice = createSlice({
     addPerson(state, action) {
       console.log(action);
       state.people = state.people.push(action.payload);
+    },
+
+    deletePerson(state, action) {
+      console.log(action);
     },
   },
 

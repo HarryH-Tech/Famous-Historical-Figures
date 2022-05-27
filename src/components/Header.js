@@ -4,9 +4,8 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
 
-function Header(props) {
+function Header(signOut, user) {
   return (
     <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
       <AppBar position="static">
@@ -18,6 +17,10 @@ function Header(props) {
           >
             Famous Historical Figures
           </Typography>
+          <Button onClick={signOut} sx={{ color: "red" }}>
+            Logout
+          </Button>
+          {user.username}
         </Toolbar>
       </AppBar>
     </Box>
