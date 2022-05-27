@@ -1,13 +1,18 @@
-import React from "react";
+import { useSelector } from "react-redux";
 
-function PeopleList({ person: { name, description, dob, image } }) {
-  // const  = person;
+function PeopleList() {
+  const state = useSelector((state) => state.data);
+  console.log(state.people);
   return (
-    <div>
-      <p>{name}</p>ddd
-      <p>{description}</p>
-      {dob}
-    </div>
+    <>
+      {state.people.length > 1
+        ? state.people.map((person) => (
+            <div key={Math.random()}>
+              <p>{person.name}</p>
+            </div>
+          ))
+        : null}
+    </>
   );
 }
 

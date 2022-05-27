@@ -1,20 +1,18 @@
 import { useState } from "react";
-import { API, graphqlOperation, Amplify, Auth } from "aws-amplify";
-import { createPerson } from "../graphql/mutations";
+import { useDispatch } from "react-redux";
 
-function AddPerson({ setPeople, people }) {
-  const [pageDetails, setPageDetails] = useState({
-    loading: false,
-    error: "",
-  });
+import { addPerson } from "../redux/slice";
+
+function AddPerson() {
   const [formState, setFormState] = useState({
-    name: "",
-    dob: "",
-    description: "",
-    image: "",
+    name: "ere",
+    dob: "er",
+    description: "rer",
+    image: "erer",
   });
 
-  const { error, loading } = pageDetails;
+  const dispatch = useDispatch();
+
   const { name, dob, description, image } = formState;
 
   function setInput(event) {
@@ -22,28 +20,14 @@ function AddPerson({ setPeople, people }) {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   }
 
-  async function addPerson() {
+  function handleAddPerson() {
     try {
       if (!name || !dob || !description || !image) {
-        setPageDetails({
-          loading: false,
-          error: "Please ensure all information is filled in",
-        });
+        console.log("ERORR");
       }
-      const person = { ...formState };
-      setPeople([...people, person]);
-      setFormState({
-        name: "",
-        dob: "",
-        description: "",
-        image: "",
-      });
-      await API.graphql(graphqlOperation(createPerson, { input: person }));
+      dispatch(addPerson(formState));
     } catch (err) {
-      setPageDetails({
-        loading: false,
-        error: "Sorry there was an error, please try again.",
-      });
+      console.log(err);
     }
   }
 
@@ -73,7 +57,7 @@ function AddPerson({ setPeople, people }) {
         placeholder="Image"
         name="image"
       />
-      <button onClick={addPerson}>Create Person</button>
+      <button onClick={handleAddPerson}>Create Person</button>
     </div>
   );
 }
