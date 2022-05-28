@@ -4,7 +4,7 @@ import App from "./App";
 
 // Redux Imports
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import store from "./redux/Store";
 
 // Amplify Imports
 import { Amplify } from "aws-amplify";

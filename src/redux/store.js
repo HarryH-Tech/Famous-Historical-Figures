@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import peopleReducer from "./slice";
+import peopleReducer from "./Slice";
 
 export default configureStore({
   reducer: {

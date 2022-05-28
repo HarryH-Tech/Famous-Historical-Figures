@@ -1,0 +1,21 @@
+#add-box {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+}
+
+.add-form-input {
+    margin-bottom: 1rem !important;
+}
+
+
+.add-form-input :active {
+    transform: translateY(0.2rem);
+    transition: 0.3s;
+}
+
+#add-button {
+    width: 50%;
+    margin: auto;
+}

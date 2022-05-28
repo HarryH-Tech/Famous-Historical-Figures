@@ -8,3 +8,7 @@
             var(--amplify-colors-blue-80),
             var(--amplify-colors-blue-40));
 }
+
+#intro-container {
+    text-align: center;
+}

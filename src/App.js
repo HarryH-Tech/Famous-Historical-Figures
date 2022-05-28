@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 // Redux Imports
-import { useDispatch } from "react-redux";
-import { fetchPeopleAction } from "./redux/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPeopleAction } from "./redux/Actions";
 
 // Amplify Imports
 import { API, Auth } from "aws-amplify";
@@ -26,6 +26,7 @@ API.configure(awsconfig);
 
 const App = () => {
   const dispatch = useDispatch();
+  //const state = useSelector((state) => state.data);
 
   useEffect(() => {
     dispatch(fetchPeopleAction());
@@ -36,17 +37,11 @@ const App = () => {
       <Authenticator>
         {({ signOut, user }) => (
           <Router>
-            <Header />{" "}
-            <div>
-              <h1>Hello {user.username}</h1>
-              <br />
-              <h2>Famous Historical Figures</h2>
-
-              <Routes>
-                <Route path="/" element={<PeopleList />} />
-                <Route path="/people/:id" element={<Person />} />
-              </Routes>
-            </div>
+            <Header signOut={signOut} user={user} />{" "}
+            <Routes>
+              <Route path="/" element={<PeopleList user={user} />} />
+              <Route path="/people/:id" element={<Person />} />
+            </Routes>
           </Router>
         )}
       </Authenticator>

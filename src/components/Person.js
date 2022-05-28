@@ -1,15 +1,19 @@
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import "../styles/Person.css";
+
+// MUI Imports
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Person(props) {
   console.log(props);
   const { id } = useParams();
-  console.log(id);
+
+  useEffect(() => {
+    // FETCH INDIVIDUAL PERSON
+  });
   return (
     <div>
-      {id}
-
       <Link to="/">
         <ArrowBackIcon />
       </Link>

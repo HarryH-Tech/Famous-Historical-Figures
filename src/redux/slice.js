@@ -1,34 +1,17 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { API, graphqlOperation, Amplify, Auth } from "aws-amplify";
-import { listPeople } from "../graphql/queries";
-import { createPerson } from "../graphql/mutations";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const fetchPeopleAction = createAsyncThunk(
-  "people_slice/fetchPeople",
-  async () => {
-    const res = await API.graphql(graphqlOperation(listPeople));
-    return res.data.listPeople.items;
-  }
-);
-
-export const addPerson = async (personData) => {
-  console.log(personData);
-  const req = await API.graphql(
-    graphqlOperation(createPerson, { input: personData })
-  );
-  console.log(req.data);
-  return req.data;
-};
-
-export const deletePerson = async (id) => {
-  console.log(id);
-};
+import {
+  fetchPeopleAction,
+  addPersonAction,
+  deletePersonAction,
+} from "./Actions";
 
 export const peopleSlice = createSlice({
   name: "people_slice",
   initialState: {
     people: [],
     loading: false,
+    error: "",
   },
   reducers: {
     setLoading(state, action) {
@@ -47,6 +30,11 @@ export const peopleSlice = createSlice({
 
     deletePerson(state, action) {
       console.log(action);
+      // state.people.filter(id => action.payload)
+    },
+
+    showError(state, action) {
+      state.error = action.payload;
     },
   },
 
@@ -58,5 +46,6 @@ export const peopleSlice = createSlice({
   },
 });
 
-export const { setLoading, fetchPeople } = peopleSlice.actions;
+export const { setLoading, fetchPeople, addPerson, deletePerson } =
+  peopleSlice.actions;
 export default peopleSlice.reducer;
