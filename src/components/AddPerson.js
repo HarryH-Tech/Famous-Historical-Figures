@@ -15,7 +15,7 @@ function AddPerson() {
     name: "ere",
     dob: "er",
     description: "rer",
-    image: "",
+    image: "d",
   });
 
   const { name, dob, description, image } = formState;
@@ -75,6 +75,7 @@ function AddPerson() {
         className="add-form-input"
       />
       {state.error && <p>{state.error}</p>}
+      {state.successMessage && <p>{state.successMessage}</p>}
       <Button id="add-button" onClick={handleAddPerson} variant="contained">
         Add Person
       </Button>

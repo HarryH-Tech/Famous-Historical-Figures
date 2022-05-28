@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import {
   fetchPeopleAction,
+  fetchPersonAction,
   addPersonAction,
   deletePersonAction,
 } from "./Actions";
@@ -10,38 +11,48 @@ export const peopleSlice = createSlice({
   name: "people_slice",
   initialState: {
     people: [],
+    person: [],
     loading: false,
+    successMessage: "",
     error: "",
   },
   reducers: {
-    setLoading(state, action) {
-      console.log(action);
-      state.loading = action.payload;
-    },
     fetchPeople(state, action) {
       state.people = action.payload;
       console.log(action);
     },
 
-    addPerson(state, action) {
+    fetchPerson(state, action) {
       console.log(action);
+      state.person = action.payload;
+    },
+
+    addPerson(state, action) {
+      console.log(action.payload);
       state.people = state.people.push(action.payload);
+      state.successMessage = "success";
     },
 
     deletePerson(state, action) {
       console.log(action);
-      // state.people.filter(id => action.payload)
     },
 
     showError(state, action) {
       state.error = action.payload;
     },
+
+    setLoading(state, action) {
+      console.log(action);
+      state.loading = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
     builder.addCase(fetchPeopleAction.fulfilled, (state, action) => {
-      // Add famous people to the state array
       state.people = action.payload;
+    });
+    builder.addCase(fetchPersonAction.fulfilled, (state, action) => {
+      state.person = action.payload;
     });
   },
 });
