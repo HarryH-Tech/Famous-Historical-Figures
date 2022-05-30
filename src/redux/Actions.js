@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API, graphqlOperation } from "aws-amplify";
 import { listPeople, getPerson } from "../graphql/queries";
 import { createPerson, deletePerson, updatePerson } from "../graphql/mutations";
+import { showError } from "./Slice";
 
 export const fetchPeopleAction = createAsyncThunk(
   "people_slice/fetchPeople",
@@ -27,20 +28,21 @@ export const addPersonAction = createAsyncThunk(
     const res = await API.graphql(
       graphqlOperation(createPerson, { input: personData })
     );
-    console.log("hi");
     return res.data;
   }
 );
 
-export const deletePersonAction = async (id) => {
-  const res = await API.graphql(
-    graphqlOperation(deletePerson, { input: { id } })
-  );
-  return res.data;
-};
+export const deletePersonAction = createAsyncThunk(
+  "people_slice/deletePerson",
+  async (id) => {
+    const res = await API.graphql(
+      graphqlOperation(deletePerson, { input: { id } })
+    );
+    return res.data;
+  }
+);
 
 export const editPersonAction = async (personData) => {
-  console.log(personData);
   const res = await API.graphql(
     graphqlOperation(updatePerson, { input: personData })
   );
@@ -49,5 +51,5 @@ export const editPersonAction = async (personData) => {
 
 export const showErrorAction = (text) => {
   console.log(text);
-  return text;
+  return showError(text);
 };

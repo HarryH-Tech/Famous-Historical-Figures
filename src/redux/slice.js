@@ -5,6 +5,7 @@ import {
   fetchPersonAction,
   addPersonAction,
   deletePersonAction,
+  showErrorAction,
 } from "./Actions";
 
 export const peopleSlice = createSlice({
@@ -37,7 +38,9 @@ export const peopleSlice = createSlice({
       console.log(action);
     },
 
-    showError(state, action) {
+    showError: (state, action) => {
+      console.log("action");
+      console.log(action);
       state.error = action.payload;
     },
 
@@ -57,6 +60,7 @@ export const peopleSlice = createSlice({
   },
 });
 
-export const { setLoading, fetchPeople, addPerson, deletePerson } =
+export const { setLoading, showError, fetchPeople, addPerson, deletePerson } =
   peopleSlice.actions;
+
 export default peopleSlice.reducer;

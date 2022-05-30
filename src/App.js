@@ -7,7 +7,7 @@ import { fetchPeopleAction } from "./redux/Actions";
 // Amplify Imports
 import { API, Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
-import { Authenticator } from "@aws-amplify/ui-react";
+import { Authenticator, useTheme } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
 //Custom Components
@@ -18,8 +18,9 @@ import Person from "./components/Person";
 //React Routeer
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-// Styles
+// Styles + Image
 import "./styles/App.css";
+import people from "./styles/images/people.jpg";
 
 Auth.configure(awsconfig);
 API.configure(awsconfig);
@@ -32,9 +33,23 @@ const App = () => {
     dispatch(fetchPeopleAction());
   }, []);
 
+  const components = {
+    Header() {
+      return (
+        <div style={{ margin: "auto", textAlign: "center" }}>
+          <img
+            style={{ width: "50%", height: "30%", marginBottom: "2rem" }}
+            src={people}
+          />
+          <h1>Famous People</h1>
+        </div>
+      );
+    },
+  };
+
   return (
     <>
-      <Authenticator>
+      <Authenticator socialProviders={["facebook"]} components={components}>
         {({ signOut, user }) => (
           <Router>
             <Header signOut={signOut} user={user} />{" "}

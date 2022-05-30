@@ -12,10 +12,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
-function CustomModal({ modalShowing, setModalShowing, person, type }) {
+function CustomModal({ modal, setModal, person, type }) {
   // const state = useSelector((state) => state.data);
   const dispatch = useDispatch();
-
+  console.log(person);
+  console.log(type);
   const [formState, setFormState] = useState({
     id: person.id,
     name: person.name,
@@ -33,12 +34,16 @@ function CustomModal({ modalShowing, setModalShowing, person, type }) {
     dispatch(editPersonAction(formState));
   };
 
+  const confirmDelete = () => {
+    dispatch(deletePersonAction(person.id));
+  };
+
   console.log(type);
   return (
     <div>
       <Modal
-        open={modalShowing}
-        onClose={() => setModalShowing(false)}
+        open={modal.showing}
+        onClose={() => setModal({ ...modal, showing: false })}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -54,9 +59,21 @@ function CustomModal({ modalShowing, setModalShowing, person, type }) {
             name="dob"
             value={formState.dob}
           />
-
-          <Button onClick={confirmEdit}>Confirm Edit</Button>
-          <Button onClick={() => setModalShowing(false)}>Cancel</Button>
+          {type === "edit" ? (
+            <>
+              <Button onClick={confirmEdit}>Confirm Edit</Button>
+              <Button onClick={() => setModal({ showing: false })}>
+                Cancel
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button onClick={confirmDelete}>Delete</Button>
+              <Button onClick={() => setModal({ showing: false })}>
+                Cancel
+              </Button>
+            </>
+          )}
         </Box>
       </Modal>
     </div>

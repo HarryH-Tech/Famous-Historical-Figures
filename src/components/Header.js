@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 
 function Header({ signOut, user }) {
   return (
-    <Box sx={{ flexGrow: 1, marginBottom: 5 }}>
+    <Box sx={{ marginBottom: 5 }}>
       <AppBar position="static">
         <Toolbar>
           <Typography
@@ -17,10 +17,14 @@ function Header({ signOut, user }) {
           >
             Famous Historical Figures
           </Typography>
-          <Button onClick={signOut} variant="contained" color="error">
-            Logout
-          </Button>
-          <Button sx={{ color: "white" }}>{user.username}</Button>
+          {signOut ? (
+            <Button onClick={signOut} variant="contained" color="error">
+              Logout
+            </Button>
+          ) : null}
+          {user ? (
+            <Button sx={{ color: "white" }}>{user.username}</Button>
+          ) : null}
         </Toolbar>
       </AppBar>
     </Box>

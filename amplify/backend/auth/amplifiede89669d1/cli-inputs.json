@@ -56,10 +56,12 @@
     "breakCircularDependency": true,
     "dependsOn": [],
     "hostedUI": true,
-    "hostedUIDomainName": "amplifiede7aec0d1-e7aec0d1",
-    "authProvidersUserPool": [],
-    "hostedUIProviderMeta": "[]",
+    "hostedUIDomainName": "amplified2cd70ffe-2cd70ffe",
+    "authProvidersUserPool": [
+      "Facebook"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}}]",
     "authProviders": [],
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/home/\",\"https://dev.d3b3i13hfoq0jk.amplifyapp.com/home/\"],\"LogoutURLs\":[\"http://localhost:3000/login/\",\"https://dev.d3b3i13hfoq0jk.amplifyapp.com/login/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://dev.d3b3i13hfoq0jk.amplifyapp.com/\"],\"LogoutURLs\":[\"https://dev.d3b3i13hfoq0jk.amplifyapp.com/\"]}"
   }
 }

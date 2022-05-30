@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/AddPerson.css";
+import Error from "./utils/Error";
 
 // Redux Imports
 import { addPersonAction, showErrorAction } from "../redux/Actions";
@@ -15,7 +16,7 @@ function AddPerson() {
     name: "ere",
     dob: "er",
     description: "rer",
-    image: "d",
+    image: "",
   });
 
   const { name, dob, description, image } = formState;
@@ -29,15 +30,16 @@ function AddPerson() {
   }
 
   function handleAddPerson() {
-    try {
-      if (!name || !dob || !description || !image) {
-        dispatch(showErrorAction("Please ensure all fields are filled in."));
-      } else {
-        dispatch(addPersonAction(formState));
-      }
-    } catch (err) {
-      dispatch(showErrorAction("Sorry there was an error, please try again."));
+    // try {
+    if (!name || !dob || !description || !image) {
+      dispatch(showErrorAction("Please ensure all fields are filled in."));
+      console.log(state);
+    } else {
+      dispatch(addPersonAction(formState));
     }
+    // } catch (err) {
+    //   dispatch(showErrorAction("Sorry there was an error, please try again."));
+    // }
   }
 
   return (
@@ -75,7 +77,7 @@ function AddPerson() {
         className="add-form-input"
       />
       {state.error && <p>{state.error}</p>}
-      {state.successMessage && <p>{state.successMessage}</p>}
+      {state.successMessage ? <Error text={state.successMessage} /> : null}
       <Button id="add-button" onClick={handleAddPerson} variant="contained">
         Add Person
       </Button>
