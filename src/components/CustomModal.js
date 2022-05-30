@@ -1,9 +1,9 @@
 import { useState } from "react";
+import "../styles/Modal.css";
 
+//  Redux Imports
 import { deletePersonAction, editPersonAction } from "../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
-
-import "../styles/Modal.css";
 
 //MUI Imports
 import Box from "@mui/material/Box";
@@ -13,10 +13,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 function CustomModal({ modal, setModal, person, type }) {
-  // const state = useSelector((state) => state.data);
   const dispatch = useDispatch();
-  console.log(person);
-  console.log(type);
+
   const [formState, setFormState] = useState({
     id: person.id,
     name: person.name,
@@ -30,12 +28,15 @@ function CustomModal({ modal, setModal, person, type }) {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   }
 
+  const { name, dob, description, image } = formState;
+
   const confirmEdit = () => {
     dispatch(editPersonAction(formState));
   };
 
   const confirmDelete = () => {
     dispatch(deletePersonAction(person.id));
+    setModal({ showing: false });
   };
 
   console.log(type);
@@ -48,28 +49,62 @@ function CustomModal({ modal, setModal, person, type }) {
         aria-describedby="modal-modal-description"
       >
         <Box id="modal">
-          <TextField
-            onChange={(event) => setInput(event)}
-            name="name"
-            id="modal-modal-title"
-            value={formState.name}
-          />
-          <TextField
-            onChange={(event) => setInput(event)}
-            name="dob"
-            value={formState.dob}
-          />
           {type === "edit" ? (
             <>
-              <Button onClick={confirmEdit}>Confirm Edit</Button>
-              <Button onClick={() => setModal({ showing: false })}>
+              <TextField
+                onChange={(event) => setInput(event)}
+                name="name"
+                className="modal-field"
+                value={name}
+              />
+              <TextField
+                onChange={(event) => setInput(event)}
+                name="dob"
+                className="modal-field"
+                value={dob}
+              />
+              <TextField
+                onChange={(event) => setInput(event)}
+                style={{ width: "90%" }}
+                name="description"
+                multiline
+                minRows={8}
+                className="modal-field"
+                value={description}
+              />
+              <TextField
+                onChange={(event) => setInput(event)}
+                name="image"
+                className="modal-field"
+                value={image}
+              />
+              <Button variant="contained" color="success" onClick={confirmEdit}>
+                Confirm Edit
+              </Button>{" "}
+              <Button
+                variant="contained"
+                onClick={() => setModal({ showing: false })}
+              >
                 Cancel
               </Button>
             </>
           ) : (
             <>
-              <Button onClick={confirmDelete}>Delete</Button>
-              <Button onClick={() => setModal({ showing: false })}>
+              <Typography className="modal-field" variant="h2">
+                {name}
+              </Typography>
+              <Typography className="modal-field">
+                Date of Birth: {dob}
+              </Typography>
+              <Typography className="modal-field">{description}</Typography>
+              <Typography className="modal-field">{image}</Typography>
+              <Button color="error" variant="contained" onClick={confirmDelete}>
+                Delete
+              </Button>{" "}
+              <Button
+                variant="contained"
+                onClick={() => setModal({ showing: false })}
+              >
                 Cancel
               </Button>
             </>

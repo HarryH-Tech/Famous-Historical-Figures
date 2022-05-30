@@ -1,8 +1,9 @@
 import { useState } from "react";
+
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 // Redux Imports
-import { deletePersonAction, editPersonAction } from "../redux/Actions";
 import { useSelector, useDispatch } from "react-redux";
 
 // MUI Imports
@@ -13,28 +14,22 @@ import Button from "@mui/material/Button";
 import Modal from "./CustomModal";
 
 function PersonListItem({ person }) {
+  //  const [itemsToBeDeleted, setItemsToBeDeleted] = useState([]);
+
   const [modal, setModal] = useState({
     showing: false,
     type: "",
   });
   const { showing, type } = modal;
 
-  const state = useSelector((state) => state.data);
-  const dispatch = useDispatch();
-
-  const handleDelete = (e, id) => {
-    e.preventDefault();
-    dispatch(deletePersonAction(id));
-  };
-
-  const handleOpenModal = (e, type, person) => {
+  const handleOpenModal = (e, type) => {
     console.log(type);
     e.preventDefault();
     setModal({ showing: !showing, type: type });
   };
 
   return (
-    <div id="person-container" key={Math.random()}>
+    <div id="person-container" key={uuidv4()}>
       <Link to={`people/${person.id}`}>{person.name}</Link>
       <p id="person-description">{person.description}</p>
       {showing ? (

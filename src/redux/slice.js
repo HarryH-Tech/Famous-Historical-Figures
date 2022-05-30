@@ -15,7 +15,7 @@ export const peopleSlice = createSlice({
     person: [],
     loading: false,
     successMessage: "",
-    error: "",
+    errorMessage: "",
   },
   reducers: {
     fetchPeople(state, action) {
@@ -29,9 +29,9 @@ export const peopleSlice = createSlice({
     },
 
     addPerson(state, action) {
-      console.log(action.payload);
-      state.people = state.people.push(action.payload);
-      state.successMessage = "success";
+      // console.log(action.payload);
+      // state.people.push(action.payload);
+      // state.successMessage = "success";
     },
 
     deletePerson(state, action) {
@@ -41,7 +41,7 @@ export const peopleSlice = createSlice({
     showError: (state, action) => {
       console.log("action");
       console.log(action);
-      state.error = action.payload;
+      state.errorMessage = action.payload;
     },
 
     setLoading(state, action) {
@@ -56,6 +56,9 @@ export const peopleSlice = createSlice({
     });
     builder.addCase(fetchPersonAction.fulfilled, (state, action) => {
       state.person = action.payload;
+    });
+    builder.addCase(addPersonAction.fulfilled, (state, action) => {
+      state.people.push(action.payload);
     });
   },
 });

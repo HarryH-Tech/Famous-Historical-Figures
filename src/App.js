@@ -36,11 +36,8 @@ const App = () => {
   const components = {
     Header() {
       return (
-        <div style={{ margin: "auto", textAlign: "center" }}>
-          <img
-            style={{ width: "50%", height: "30%", marginBottom: "2rem" }}
-            src={people}
-          />
+        <div style={{ margin: "1rem auto", textAlign: "center" }}>
+          <img style={{ width: "50%", height: "30%" }} src={people} />
           <h1>Famous People</h1>
         </div>
       );

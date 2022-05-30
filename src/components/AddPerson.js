@@ -25,7 +25,12 @@ function AddPerson() {
   const state = useSelector((state) => state.data);
 
   function setInput(event) {
+    console.log(formState);
     event.preventDefault();
+    if (state.errorMessage) {
+      dispatch(showErrorAction(""));
+    }
+
     setFormState({ ...formState, [event.target.name]: event.target.value });
   }
 
@@ -67,6 +72,8 @@ function AddPerson() {
         name="description"
         variant="outlined"
         className="add-form-input"
+        multiline
+        minRows={5}
       />
       <TextField
         onChange={(event) => setInput(event)}
@@ -76,8 +83,8 @@ function AddPerson() {
         variant="outlined"
         className="add-form-input"
       />
-      {state.error && <p>{state.error}</p>}
-      {state.successMessage ? <Error text={state.successMessage} /> : null}
+      {state.successMessage && <p>{state.successMessage}</p>}
+      {state.errorMessage ? <Error text={state.errorMessage} /> : null}
       <Button id="add-button" onClick={handleAddPerson} variant="contained">
         Add Person
       </Button>

@@ -6,7 +6,12 @@
     width: 40%;
     background-color: white;
     border: 2px solid #000;
+    border-radius: 0.5rem;
     box-shadow: 24;
-    padding: 0.4rem;
+    padding: 0.6rem;
     text-align: center;
+}
+
+.modal-field {
+    margin: 0.6rem !important;
 }
