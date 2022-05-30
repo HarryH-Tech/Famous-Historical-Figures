@@ -1,10 +1,6 @@
 import { useState } from "react";
-
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-
-// Redux Imports
-import { useSelector, useDispatch } from "react-redux";
 
 // MUI Imports
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -14,8 +10,6 @@ import Button from "@mui/material/Button";
 import Modal from "./CustomModal";
 
 function PersonListItem({ person }) {
-  //  const [itemsToBeDeleted, setItemsToBeDeleted] = useState([]);
-
   const [modal, setModal] = useState({
     showing: false,
     type: "",

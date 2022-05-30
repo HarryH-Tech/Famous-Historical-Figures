@@ -3,7 +3,7 @@ import "../styles/Modal.css";
 
 //  Redux Imports
 import { deletePersonAction, editPersonAction } from "../redux/Actions";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 //MUI Imports
 import Box from "@mui/material/Box";
@@ -31,15 +31,15 @@ function CustomModal({ modal, setModal, person, type }) {
   const { name, dob, description, image } = formState;
 
   const confirmEdit = () => {
+    setModal({ showing: false });
     dispatch(editPersonAction(formState));
   };
 
   const confirmDelete = () => {
-    dispatch(deletePersonAction(person.id));
     setModal({ showing: false });
+    dispatch(deletePersonAction(person.id));
   };
 
-  console.log(type);
   return (
     <div>
       <Modal
@@ -56,12 +56,14 @@ function CustomModal({ modal, setModal, person, type }) {
                 name="name"
                 className="modal-field"
                 value={name}
+                placeholder="Name"
               />
               <TextField
                 onChange={(event) => setInput(event)}
                 name="dob"
                 className="modal-field"
                 value={dob}
+                placeholder="Date of Birth"
               />
               <TextField
                 onChange={(event) => setInput(event)}
@@ -71,13 +73,16 @@ function CustomModal({ modal, setModal, person, type }) {
                 minRows={8}
                 className="modal-field"
                 value={description}
+                placeholder="Description..."
               />
               <TextField
                 onChange={(event) => setInput(event)}
                 name="image"
                 className="modal-field"
                 value={image}
+                placeholder="image"
               />
+              <br />
               <Button variant="contained" color="success" onClick={confirmEdit}>
                 Confirm Edit
               </Button>{" "}

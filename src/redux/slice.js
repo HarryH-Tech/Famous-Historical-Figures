@@ -5,6 +5,7 @@ import {
   fetchPersonAction,
   addPersonAction,
   deletePersonAction,
+  editPersonAction,
   showErrorAction,
 } from "./Actions";
 
@@ -59,6 +60,13 @@ export const peopleSlice = createSlice({
     });
     builder.addCase(addPersonAction.fulfilled, (state, action) => {
       state.people.push(action.payload);
+    });
+
+    builder.addCase(editPersonAction.fulfilled, (state, action) => {
+      let updatedPerson = state.people.find(
+        (person) => action.payload.updatePerson.id
+      );
+      updatedPerson = action.payload;
     });
   },
 });

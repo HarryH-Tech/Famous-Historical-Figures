@@ -6,14 +6,13 @@ import Button from "@mui/material/Button";
 import AddPerson from "./AddPerson";
 import PersonListItem from "./PersonListItem";
 import "../styles/PeopleList.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function PeopleList({ user }) {
   const [checked, setChecked] = useState(false);
   const [peopleIds, setPeopleIds] = useState([]);
 
   const state = useSelector((state) => state.data);
-  const dispatch = useDispatch();
 
   // When checkbox is (un)selected remove/add id to the peopleIds array
   const handleSelectItemChange = (event, id) => {
@@ -42,19 +41,19 @@ function PeopleList({ user }) {
         </h2>
       </div>
       <AddPerson />
-      {peopleIds.length > 1 ? (
+      {peopleIds.length > 0 ? (
         <Button onClick={deleteMultiplePeople}>Delete People</Button>
       ) : null}
 
       <div id="people-list-container">
         {state.people.length > 1
           ? state.people.map((person) => (
-              <div id="person-list-item-container">
+              <div id="person-list-item-container" key={uuidv4()}>
                 <input
                   type="checkbox"
                   onChange={(e) => handleSelectItemChange(e, person.id)}
                 />
-                <PersonListItem key={Math.random()} person={person} />
+                <PersonListItem person={person} />
               </div>
             ))
           : null}

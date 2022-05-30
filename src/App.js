@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 
 // Redux Imports
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchPeopleAction } from "./redux/Actions";
 
 // Amplify Imports
 import { API, Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
-import { Authenticator, useTheme } from "@aws-amplify/ui-react";
+import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
 //Custom Components

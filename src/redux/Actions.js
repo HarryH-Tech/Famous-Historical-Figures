@@ -42,12 +42,15 @@ export const deletePersonAction = createAsyncThunk(
   }
 );
 
-export const editPersonAction = async (personData) => {
-  const res = await API.graphql(
-    graphqlOperation(updatePerson, { input: personData })
-  );
-  return res.data;
-};
+export const editPersonAction = createAsyncThunk(
+  "people_slice/editPerson",
+  async (personData) => {
+    const res = await API.graphql(
+      graphqlOperation(updatePerson, { input: personData })
+    );
+    return res.data;
+  }
+);
 
 export const showErrorAction = (text) => {
   console.log(text);
