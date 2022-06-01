@@ -16,7 +16,7 @@ function AddPerson() {
     name: "ere",
     dob: "er",
     description: "rer",
-    image: "",
+    image: "ww",
   });
 
   const { name, dob, description, image } = formState;
@@ -24,12 +24,13 @@ function AddPerson() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.data);
 
-  function setInput(event) {
+  function handleInput(event) {
     console.log(formState);
     event.preventDefault();
     if (state.errorMessage) {
       dispatch(showErrorAction(""));
     }
+    console.log(formState);
 
     setFormState({ ...formState, [event.target.name]: event.target.value });
   }
@@ -50,7 +51,7 @@ function AddPerson() {
   return (
     <Box id="add-box">
       <TextField
-        onChange={(event) => setInput(event)}
+        onChange={(event) => handleInput(event)}
         value={name}
         placeholder="Name"
         name="name"
@@ -58,7 +59,7 @@ function AddPerson() {
         className="add-form-input"
       />
       <TextField
-        onChange={(event) => setInput(event)}
+        onChange={(event) => handleInput(event)}
         value={dob}
         placeholder="Date of Birth"
         name="dob"
@@ -66,7 +67,7 @@ function AddPerson() {
         className="add-form-input"
       />
       <TextField
-        onChange={(event) => setInput(event)}
+        onChange={(event) => handleInput(event)}
         value={description}
         placeholder="Description"
         name="description"
@@ -76,7 +77,7 @@ function AddPerson() {
         minRows={5}
       />
       <TextField
-        onChange={(event) => setInput(event)}
+        onChange={(event) => handleInput(event)}
         value={image}
         placeholder="Image"
         name="image"

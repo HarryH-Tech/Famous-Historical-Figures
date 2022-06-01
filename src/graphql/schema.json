@@ -716,105 +716,127 @@
         "name": "Mutation",
         "description": null,
         "fields": [{
-          "name": "createPerson",
-          "description": null,
-          "args": [{
-            "name": "input",
+            "name": "createPerson",
             "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
+            "args": [{
+              "name": "input",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CreatePersonInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }, {
+              "name": "condition",
+              "description": null,
+              "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "CreatePersonInput",
+                "name": "ModelPersonConditionInput",
                 "ofType": null
-              }
-            },
-            "defaultValue": null
-          }, {
-            "name": "condition",
-            "description": null,
+              },
+              "defaultValue": null
+            }],
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ModelPersonConditionInput",
+              "kind": "OBJECT",
+              "name": "Person",
               "ofType": null
             },
-            "defaultValue": null
-          }],
-          "type": {
-            "kind": "OBJECT",
-            "name": "Person",
-            "ofType": null
-          },
-          "isDeprecated": false,
-          "deprecationReason": null
-        }, {
-          "name": "updatePerson",
-          "description": null,
-          "args": [{
-            "name": "input",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UpdatePersonInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
+            "isDeprecated": false,
+            "deprecationReason": null
           }, {
-            "name": "condition",
+            "name": "updatePerson",
             "description": null,
+            "args": [{
+              "name": "input",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UpdatePersonInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }, {
+              "name": "condition",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "ModelPersonConditionInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            }],
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ModelPersonConditionInput",
+              "kind": "OBJECT",
+              "name": "Person",
               "ofType": null
             },
-            "defaultValue": null
-          }],
-          "type": {
-            "kind": "OBJECT",
-            "name": "Person",
-            "ofType": null
+            "isDeprecated": false,
+            "deprecationReason": null
           },
-          "isDeprecated": false,
-          "deprecationReason": null
-        }, {
-          "name": "deletePerson",
-          "description": null,
-          "args": [{
-            "name": "input",
+          {
+            "_COMMENT": "BELOW IS CUSTOM MUTATION TO DELETE MULTIPLE PEOPLE"
+          },
+          {
+            "name": "deletePeople",
+            "description": "null",
+            "args": [{
+              "name": "input",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }]
+          },
+          {
+            "name": "deletePerson",
             "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
+            "args": [{
+              "name": "input",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "DeletePersonInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }, {
+              "name": "condition",
+              "description": null,
+              "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "DeletePersonInput",
+                "name": "ModelPersonConditionInput",
                 "ofType": null
-              }
-            },
-            "defaultValue": null
-          }, {
-            "name": "condition",
-            "description": null,
+              },
+              "defaultValue": null
+            }],
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "ModelPersonConditionInput",
+              "kind": "OBJECT",
+              "name": "Person",
               "ofType": null
             },
-            "defaultValue": null
-          }],
-          "type": {
-            "kind": "OBJECT",
-            "name": "Person",
-            "ofType": null
-          },
-          "isDeprecated": false,
-          "deprecationReason": null
-        }],
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,

@@ -4,7 +4,7 @@ import {
   fetchPeopleAction,
   fetchPersonAction,
   addPersonAction,
-  deletePersonAction,
+  removePersonAction,
   editPersonAction,
   showErrorAction,
 } from "./Actions";
@@ -29,15 +29,11 @@ export const peopleSlice = createSlice({
       state.person = action.payload;
     },
 
-    addPerson(state, action) {
-      // console.log(action.payload);
-      // state.people.push(action.payload);
-      // state.successMessage = "success";
-    },
+    addPerson(state, action) {},
 
-    deletePerson(state, action) {
-      console.log(action);
-    },
+    editPerson(state, action) {},
+
+    removePerson(state, action) {},
 
     showError: (state, action) => {
       console.log("action");
@@ -59,19 +55,38 @@ export const peopleSlice = createSlice({
       state.person = action.payload;
     });
     builder.addCase(addPersonAction.fulfilled, (state, action) => {
-      state.people.push(action.payload);
+      state.people.push(action.payload.payload);
+    });
+
+    builder.addCase(removePersonAction.fulfilled, (state, action) => {
+      const filteredArray = state.people.filter(
+        (person) => person.id !== action.payload.payload.id
+      );
+      state.people.splice(0, state.people.length, ...filteredArray);
     });
 
     builder.addCase(editPersonAction.fulfilled, (state, action) => {
-      let updatedPerson = state.people.find(
-        (person) => action.payload.updatePerson.id
+      // Create new array containing updated person along with all other unedited people and
+      // set state.people equal to the new array
+      // Doubt this is most efficient way of doing it but only way I could find
+      // that updates the component without needing to refresh the page
+      const updatedArray = state.people.map((person) =>
+        person.id === action.payload.payload.id
+          ? action.payload.payload
+          : person
       );
-      updatedPerson = action.payload;
+      state.people.splice(0, state.people.length, ...updatedArray);
     });
   },
 });
 
-export const { setLoading, showError, fetchPeople, addPerson, deletePerson } =
-  peopleSlice.actions;
+export const {
+  setLoading,
+  showError,
+  fetchPeople,
+  addPerson,
+  editPerson,
+  removePerson,
+} = peopleSlice.actions;
 
 export default peopleSlice.reducer;

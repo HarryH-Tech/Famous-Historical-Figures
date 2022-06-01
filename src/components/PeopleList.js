@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "@mui/material/Button";
 
@@ -31,6 +31,8 @@ function PeopleList({ user }) {
     console.log("deleting");
   };
 
+  useEffect(() => {}, [state.people]);
+
   return (
     <>
       <div id="intro-container">
@@ -52,6 +54,7 @@ function PeopleList({ user }) {
                 <input
                   type="checkbox"
                   onChange={(e) => handleSelectItemChange(e, person.id)}
+                  checked={peopleIds.includes(person.id)}
                 />
                 <PersonListItem person={person} />
               </div>

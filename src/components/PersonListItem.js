@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { useSelector } from "react-redux";
 
 // MUI Imports
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -15,13 +16,14 @@ function PersonListItem({ person }) {
     type: "",
   });
   const { showing, type } = modal;
+  const state = useSelector((state) => state.data);
 
   const handleOpenModal = (e, type) => {
     console.log(type);
     e.preventDefault();
     setModal({ showing: !showing, type: type });
   };
-
+  // console.log(state);
   return (
     <div id="person-container" key={uuidv4()}>
       <Link to={`people/${person.id}`}>{person.name}</Link>

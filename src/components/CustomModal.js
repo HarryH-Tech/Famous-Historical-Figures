@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/Modal.css";
 
 //  Redux Imports
-import { deletePersonAction, editPersonAction } from "../redux/Actions";
+import { removePersonAction, editPersonAction } from "../redux/Actions";
 import { useDispatch } from "react-redux";
 
 //MUI Imports
@@ -37,7 +37,8 @@ function CustomModal({ modal, setModal, person, type }) {
 
   const confirmDelete = () => {
     setModal({ showing: false });
-    dispatch(deletePersonAction(person.id));
+    dispatch(removePersonAction(person.id));
+    console.log(person.id);
   };
 
   return (

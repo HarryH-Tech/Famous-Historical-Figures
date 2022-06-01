@@ -49,3 +49,10 @@ export const deletePerson = /* GraphQL */ `
     }
   }
 `;
+export const deletePeople = /* GraphQL */ `
+  mutation DeletePeople($input: DeletePeopleInput!) {
+    deletePeople(input: $input) {
+      ids
+    }
+  }
+`;
